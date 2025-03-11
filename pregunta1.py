@@ -33,8 +33,10 @@ def div_t(x):
         x0 = eps**8
     elif factorial(20) < x <= factorial(40):
         x0 = eps**4
+    elif 0 < x <= factorial(20):
+        x0 = eps ** 2
     else:
-        x0 = eps**2
+        return 0
     for k in range(1, iterMax + 1):
         xk = x0 * (2 - x * x0)
         if abs(xk - x0) < tol * abs(xk):
@@ -44,7 +46,7 @@ def div_t(x):
 
 """
 Funcion: e^x
-Dominio: Todos los reales
+Dominio: Reales
 """
 def exp_t(x):
     Sk_v = 1
@@ -99,7 +101,7 @@ Dominio: Reales excepto los valores dados por Pi/2 + kPi, donde k pertenece a lo
 def tan_t(x):
     if x == Pi:
         return 0
-    elif -tol < (x - Pi / 2) % Pi < tol:
+    elif -tol < (x - Pi * div_t(2)) % Pi < tol:
         return "La tangente no está definida para x = Pi/2 + kPi."
     else:
         return sin_t(x) * div_t(cos_t(x))
@@ -267,7 +269,7 @@ def atan_t(x):
         for k in range(0, iterMax):
             signo = (-1) ** k
             c = (2 * k + 1) * x ** (2 * k +1)
-            denominador = 1/c
+            denominador = 1 * div_t(c)
             Sk = signo * (denominador)
             Sk_v_prev = Sk_v
             Sk_v += Sk
@@ -279,7 +281,7 @@ def atan_t(x):
         for k in range(0, iterMax):
             signo = (-1) ** k
             c = (2 * k + 1) * x ** (2 * k +1)
-            denominador = 1/c
+            denominador = 1 * div_t(c)
             Sk = signo * (denominador)
             Sk_v_prev = Sk_v
             Sk_v += Sk
@@ -293,7 +295,7 @@ Funcion: sec(x)
 Dominio: Reales excepto los valores dados por Pi/2 + kPi donde k pertece a los enteros
 """
 def sec_t(x):
-    if -tol < (x - Pi / 2) % Pi < tol:
+    if -tol < (x - Pi * div_t(2)) % Pi < tol:
         return "La secante no está definida para x = Pi/2 + kPi."
     else:
         return div_t(cos_t(x))

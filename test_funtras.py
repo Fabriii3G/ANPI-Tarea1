@@ -11,5 +11,5 @@ sumando = P.atan_t(P.exp_t(-1)) #arctan(e^-1)
 
 Resultado = division + sumando #3√(cos(3/7) + ln(2)) / sinh(√2) + arctan(e^-1)
 
-print("resultado")
+print("Resultado")
 print(Resultado)
